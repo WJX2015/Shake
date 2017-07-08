@@ -177,13 +177,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             //获取各方向变动的绝对值
             if ((Math.abs(x)) > 17 || (Math.abs(y)) > 17 || (Math.abs(z)) > 17) {
-                isShake = true;
 
                 //实现摇动逻辑，后进行震动
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
+                            if (isShake) {
+                                return;
+                            }
+                            isShake = true;
                             //开始震动 发出提示音 展示动画效果
                             mHandler.obtainMessage(START_SHAKE).sendToTarget();
                             Thread.sleep(1000);
@@ -192,6 +195,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                             Thread.sleep(1000);
                             //摇动结束
                             mHandler.obtainMessage(END_SHAKE).sendToTarget();
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

@@ -42,10 +42,9 @@ public class MyHandler extends Handler {
                 mActivity.mVibrator.vibrate(300);
                 break;
             case END_SHAKE:
-                //整体效果结束，将震动设置为false
-                mActivity.isShake = false;
                 //展示上下两种图片回来的效果
                 mActivity.startAnimation(true);
+                mActivity.isShake = false;
                 break;
         }
     }
